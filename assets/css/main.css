@@ -635,13 +635,16 @@ section {
 # About Us Section
 --------------------------------------------------------------*/
 .about{
-  margin-top: 5%;
+  /* margin-top: 5%; */
+  background-color: #353131;
 }
+
 .about .content h3 {
   font-weight: 700;
   font-size: 32px;
   font-family: var(--font-secondary);
-  color: #001f8d;
+  color: #FF0000;
+  padding-top: 10%;
 }
 
 .about .content ul {
@@ -1863,9 +1866,9 @@ section {
 --------------------------------------------------------------*/
 #hero {
   width: 100%;
-  height: 80vh;
+  height: 100vh;
   background-color: var(--color-secondary);
-  background-image: url("../img/Background-home.png");
+  background-image: url("../img/background_hd.jpg");
   background-size: cover;
   background-position: center;
   position: relative;

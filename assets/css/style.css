@@ -15,7 +15,10 @@
 
 body {
   font-family: "Open Sans", sans-serif;
-  background: #f6f9ff;
+  /* background: #f6f9ff; */
+  background: linear-gradient(rgba(14, 29, 52, 0.6), rgba(14, 29, 52, 0.8)), url("../img/bg-login.jpg") center center;
+  background-size: cover;
+  /* padding: 100px 0; */
   color: #444444;
 }
 
@@ -372,7 +375,7 @@ h6 {
 .logo span {
   font-size: 26px;
   font-weight: 700;
-  color: #012970;
+  color: #fff;
   font-family: "Nunito", sans-serif;
 }
 
