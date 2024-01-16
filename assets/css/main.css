@@ -76,7 +76,7 @@ section {
   text-transform: uppercase;
   margin-bottom: 20px;
   padding-bottom: 0;
-  color: #001973;
+  color: #000000;
   position: relative;
   z-index: 2;
   margin-bottom: 20px;
@@ -787,7 +787,7 @@ section {
 }
 
 .style_vehicle .card a {
-  color: #001973;
+  color: #000000;
   transition: 0.3;
 }
 
@@ -1883,14 +1883,16 @@ section {
   font-size: 60px;
   font-weight: 700;
   line-height: 56px;
-  color: #FF0000;
+  color: #ffffff;
+
 }
 
 #hero h2 {
-  color: rgba(0, 0, 0, 0.6);
-  margin-top: 10px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 0px;
   margin-bottom: 50px;
   font-size: 18px;
+  padding-bottom: 5cm;
 }
 
 #hero .btn-get-started {
