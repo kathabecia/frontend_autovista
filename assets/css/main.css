@@ -812,7 +812,7 @@ section {
 --------------------------------------------------------------*/
 .services .card {
   border: 1px solid rgba(14, 29, 52, 0.15);
-  background: #fff;
+  background: #ffffff;
   position: relative;
   border-radius: 0;
   height: 100%;
@@ -839,6 +839,7 @@ section {
 
 .services .card a {
   color: #001973;
+  
   transition: 0.3;
 }
 

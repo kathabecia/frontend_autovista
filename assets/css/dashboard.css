@@ -11019,14 +11019,17 @@ body {
 }
 
 .sb-sidenav-dark {
-  background-color: #212529;
-  color: rgba(255, 255, 255, 0.5);
+  /* background-color: #212529;
+  color: rgba(255, 255, 255, 0.5); */
+  background: rgb(14,8,117);
+background: linear-gradient(0deg, rgba(14,8,117,1) 0%, rgba(8,8,102,1) 44%, rgba(9,104,124,0.9304971988795518) 100%);
 }
 .sb-sidenav-dark .sb-sidenav-menu .sb-sidenav-menu-heading {
   color: rgba(255, 255, 255, 0.25);
 }
 .sb-sidenav-dark .sb-sidenav-menu .nav-link {
-  color: rgba(255, 255, 255, 0.5);
+  /* color: rgba(255, 255, 255, 0.5); */
+  color: white;
 }
 .sb-sidenav-dark .sb-sidenav-menu .nav-link .sb-nav-link-icon {
   color: rgba(255, 255, 255, 0.25);

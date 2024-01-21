@@ -21,11 +21,11 @@
         <!-- <sc:\Users\nicole\Downloads\NiceAdmin\NiceAdmin\pages-register.htmlcript type="module" src="js/dashboard/owners.js"></sc:> -->
     </head>
     <body class="sb-nav-fixed">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <nav class="sb-topnav navbar navbar-expand ">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="dashboard.html">Peak<span class="text-danger">Move</span></a>
+            <a class="pt-5 navbar-brand text-center text-white " href="dashboard.html"><b>AutoVista</b></span></a>
             <!-- Sidebar Toggle-->
-            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+            <!-- <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button> -->
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
                 <!-- <div class="input-group">
@@ -35,14 +35,14 @@
                 <!-- <i class="fas fa-calendar-alt text-white border-end border-secondary pe-2 me-2"> <span class="text-body" id="currentDate"></span></i> -->
             </form>
             <!-- Navbar-->
-            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#" id="btn_logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
-                    </ul>
-                </li>
-            </ul>
+                <!-- <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#" id="btn_logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+                        </ul>
+                    </li>
+                </ul> -->
         </nav>
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
@@ -67,15 +67,21 @@
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-calculator"></i></div>
                                 Declaration Form Calculator
                             </a>
+                            
                             <!-- Admin Pages -->
                             <div id="nav_admin_pages"></div>
                             <!-- End of Admin Pages -->
+                            
                         </div>
                     </div>
                     <!-- <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
                         <span id="user_logged"></span>
                     </div> -->
+                    <a class="nav-link ">
+                        <a class="sb-nav-link-icon pb-5 ps-3 text-white " href="#" id="btn_logout">
+                        <i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                    </a>
                 </nav>
             </div>
             <div id="layoutSidenav_content">

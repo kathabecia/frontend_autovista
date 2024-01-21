@@ -5,7 +5,7 @@ import { backendURL, successNotification, errorNotification} from "../utils/util
 const form_login = document.getElementById("form_login");
 
 form_login.onsubmit = async (e) => {
-  e.preventDefault();
+  
 
 // disable button
   document.querySelector("#form_login button").disabled = true;
@@ -24,9 +24,10 @@ form_login.onsubmit = async (e) => {
       method: 'POST',
       headers: {
         Accept: "application/json",
-        "ngrok-skip-browser-warning": "69420", // Include ngrok bypass header directly
+        // "ngrok-skip-browser-warning": "69420", // Include ngrok bypass header directly
       },
       body:formData,
+      
     }
   );
 
