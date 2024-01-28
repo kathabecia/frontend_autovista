@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>CarServ - Car Repair HTML Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700&family=Ubuntu:wght@400;500&display=swap" rel="stylesheet"> 
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="assets/css/style.css" rel="stylesheet">
+
+    <!-- Scripts -->
+    <script type="module" src="assets/js/dashboard/dealer-locator.js"></script>
+    <!-- <script type="module" src="js/utils/utils.js"></script> -->
+    <script src="assets/js/utils/scripts.js" defer></script>
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+
+    <!-- Topbar Start -->
+    <div class="container-fluid sticky-top px-0">
+        <div class="container-fluid topbar bg-dark d-none d-lg-block">
+            <div class="container px-0">
+                <div class="topbar-top d-flex justify-content-between flex-lg-wrap">
+                    <div class="top-info flex-grow-0">
+                        <span class="rounded-circle btn-sm-square bg-primary me-2">
+                            <i class="fas fa-bolt text-white"></i>
+                        </span>
+                        <div class="pe-2 me-3 border-end border-white d-flex align-items-center">
+                            <p class="mb-0 text-white fs-6 fw-normal">Promo</p>
+                        </div>
+                        <div class="overflow-hidden" style="width: 735px;">
+                            <div id="note" class="ps-2">
+                                <!-- <img src="img/features-fashion.jpg" class="img-fluid rounded-circle border border-3 border-primary me-2" style="width: 30px; height: 30px;" alt=""> -->
+                                <i class="fas fa-car" style="width: 30px; height: 18px;"></i>
+                                <a href="#"><p class="text-danger mb-0 link-hover">Toyota Rush is now 10% discount until January 30</p></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="top-link flex-lg-wrap">
+                        <i class="fas fa-calendar-alt text-white border-end border-secondary pe-2 me-2"> <span class="text-body" id="currentDate"></span></i>
+                        <!-- <div class="d-flex icon">
+                            <p class="mb-0 text-white me-2">Follow Us:</p>
+                            <a href="" class="me-2"><i class="fab fa-facebook-f text-body link-hover"></i></a>
+                            <a href="" class="me-2"><i class="fab fa-twitter text-body link-hover"></i></a>
+                            <a href="" class="me-2"><i class="fab fa-instagram text-body link-hover"></i></a>
+                            <a href="" class="me-2"><i class="fab fa-youtube text-body link-hover"></i></a>
+                            <a href="" class="me-2"><i class="fab fa-linkedin-in text-body link-hover"></i></a>
+                            <a href="" class="me-2"><i class="fab fa-skype text-body link-hover"></i></a>
+                            <a href="" class=""><i class="fab fa-pinterest-p text-body link-hover"></i></a>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+        <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+            <h2 class="m-0 text-primary"><img src="img/logo.png" alt="" width="50px"><span class="text-dark">Peak</span>Move</h2>
+        </a>
+        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto p-4 p-lg-0">
+                <a href="index.html" class="nav-item nav-link">Home</a>
+                <a href="about.html" class="nav-item nav-link">About</a>
+                <a href="service.html" class="nav-item nav-link">Services</a>
+                <a href="vehicle.html" class="nav-item nav-link">Explore Vehicles</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Buying Guide</a>
+                    <div class="dropdown-menu fade-up m-0">
+                        <a href="dealer-locator.html" class="dropdown-item active">Dealer Locator</a>
+                        <a href="price-list.html" class="dropdown-item">Price List</a>
+                    </div>
+                </div>
+                <a href="contact.html" class="nav-item nav-link">Contact</a>
+                </div>
+            </div>
+            <a href="login.html" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Log in / Sign up<i class="fa fa-arrow-right ms-3"></i></a>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+
+    <!-- Page Header Start -->
+    <div class="container-fluid page-header mb-5 p-0" style="background-image: url(img/carousel-bg-1.jpg);">
+        <div class="container-fluid page-header-inner py-5">
+            <div class="container text-center">
+                <h1 class="display-3 text-white mb-3 animated slideInDown">Dealer Locator</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center text-uppercase">
+                        <li class="breadcrumb-item"><a href="#">Profile</a></li>
+                        <li class="breadcrumb-item"><a href="#">Products</a></li>
+                        <li class="breadcrumb-item"><a href="#">Inventory</a></li>
+                        <li class="breadcrumb-item text-white active" aria-current="page">Dealer Locator</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+    <!-- Dealer Locator Start -->
+    <div class="container py-5">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h1 class="mb-5">Find dealer anytime, anywhere</h1>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="container bg-gray py-3">
+                        <!-- Search Form -->
+                        <form id="form_search">
+                            <div class="mb-3">
+                                <label for="area" class="form-label">Area</label>
+                                <select class="form-select" id="area" name="area">
+                                    <option value="Metro Manila">Metro Manila</option>
+                                    <!-- Add more options as needed -->
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="dealer_name" class="form-label">Select Dealer</label>
+                                <select class="form-select" id="dealer_name" name="dealer_name">
+                                    <option value="PeakMove Cubao">PeakMove Cubao</option>
+                                    <option value="PeakMove Pasig">PeakMove Pasig</option>
+                                    <option value="PeakMove Valenzuela">PeakMove Valenzuela</option>
+                                    <!-- Add more options as needed -->
+                                </select>
+                            </div>
+                            <input type="hidden" id="keyword" name="keyword" value="">
+                            <button type="submit" class="btn btn-primary">Find Dealer</button>
+                        </form>
+                        <!-- End of Search Form -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+    <!-- Dealer Locator End -->
+
+    <!-- Get All Data -->
+    <div class="row" id="get_data">
+        <div class="col-sm-12 d-flex justify-content-center align-items-center">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <b class="ms-2">Loading Data...</b>
+        </div>
+    </div>
+
+    <!-- Pagination of All Data -->
+    <div class="d-flex justify-content-center">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination" id="get_pagination"></ul>
+        </nav>
+    </div>
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-light footer pt-3 mt-3 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5 mb-5">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4">
+                    <h2 class="mb-2 d-flex justify-content-center"><span class="text-white">Peak</span><span class="text-danger">Move</span></h2>
+                    <div class="d-flex p-0 d-flex justify-content-center">
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4"></div>
+            </div>
+            <div class="row g-5">
+                <div class="col-lg-3">
+                    <h4 class="text-light mb-4 text-center">Explore Vehicle</h4>
+                    <a class="btn btn-link d-flex justify-content-center" href="">Daihatsu</a>
+                    <a class="btn btn-link d-flex justify-content-center" href="">Hino</a>
+                    <a class="btn btn-link d-flex justify-content-center" href="">Lexus</a>
+                    <a class="btn btn-link d-flex justify-content-center" href="">Toyota</a>
+                </div>
+                <div class="col-lg-3">
+                    <h4 class="text-light mb-4 text-center">Buying Guide</h4>
+                    <a class="btn btn-link d-flex justify-content-center" href="">Dealer Locator</a>
+                    <a class="btn btn-link d-flex justify-content-center" href="">Price List</a>
+                </div>
+                <div class="col-lg-3">
+                    <h4 class="text-light mb-4 text-center">Care & Maintenance</h4>
+                    <a class="btn btn-link d-flex justify-content-center" href="">PeakMove  Express Service</a>
+                    <a href="">
+                        <ul class="text-white">
+                            <li class="d-flex justify-content-center">Express Maintenance</li>
+                            <li class="d-flex justify-content-center">AirCare</li>
+                            <li class="d-flex justify-content-center">Smile</li>
+                        </ul>
+                    </a>
+                    <a class="btn btn-link d-flex justify-content-center" href="">PeakMove Insure</a>
+                </div>
+                <div class="col-lg-3">
+                    <h4 class="text-light mb-4 text-center">What's New</h4>
+                    <a class="btn btn-link d-flex justify-content-center" href="">Promos</a>
+                    <a class="btn btn-link d-flex justify-content-center" href="">Newsroom</a>
+                    <a class="btn btn-link d-flex justify-content-center" href="">Stories</a>
+                </div>
+                <!-- <div class="col-lg-3 col-md-6">
+                    <h4 class="text-light mb-4">Newsletter</h4>
+                    <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                    <div class="position-relative mx-auto" style="max-width: 400px;">
+                        <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
+                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+        <div class="container">
+            <div class="copyright">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a class="border-bottom" href="#">PeakMove Automobile Company</a>, All Right Reserved.
+
+                        <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                        Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
+                        <br>Distributed By: <a class="border-bottom" href="https://themewagon.com" target="_blank">ThemeWagon</a>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <div class="footer-menu">
+                            <a href="">Home</a>
+                            <a href="">Cookies</a>
+                            <a href="">Help</a>
+                            <a href="">FQAs</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/utils/main.js"></script>
+</body>
+
+</html>

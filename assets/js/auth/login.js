@@ -1,11 +1,16 @@
 // Backend URL
 import { backendURL, successNotification, errorNotification} from "../utils/utils.js";
+import { setRouter } from "../router/router.js";
+
+// Set router
+setRouter();
 
 // Form Register
 const form_login = document.getElementById("form_login");
 
 form_login.onsubmit = async (e) => {
-  
+  e.preventDefault();
+  // console.log("ma click");
 
 // disable button
   document.querySelector("#form_login button").disabled = true;
@@ -18,9 +23,7 @@ form_login.onsubmit = async (e) => {
   const formData = new FormData(form_login);
 
 //   fetch API user login endpoint
-  const response = await fetch(
-    backendURL + "/api/login",
-    {
+  const response = await fetch(backendURL + "/api/login",{
       method: 'POST',
       headers: {
         Accept: "application/json",

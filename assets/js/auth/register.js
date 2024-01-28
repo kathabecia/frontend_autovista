@@ -1,9 +1,12 @@
 // Backend URL
 
-// import { backendURL, successNotification, errorNotification} from "../utils/utils.js";
+import { backendURL, successNotification, errorNotification } from "../utils/utils.js";
+import { setRouter } from "../router/router.js";
+
+// Set router
+setRouter();
 
 // Form Register
-const url = "http://backend-autovista.test";
 const form_register = document.getElementById("form_register");
 
 form_register.onsubmit = async (e) => {
@@ -11,7 +14,7 @@ form_register.onsubmit = async (e) => {
 
 // disable button 
   document.querySelector("#form_register button").disabled = true;
-  // document.querySelector("#form_register button").innerHTML = 
+  document.querySelector("#form_register button").innerHTML = 
   `<div class="spinner-border me-2" role="status">
   <span class="visually-hidden">Loading...</span>
   </div> <span>Loading...</span>`;
@@ -20,7 +23,7 @@ form_register.onsubmit = async (e) => {
   const formData = new FormData(form_register);
 
 //   fetch API user register endpoint
-  const response = await fetch(url + "/api/user",
+  const response = await fetch(backendURL + "/api/user",
   {
       method: 'POST',
       headers: {
@@ -38,9 +41,6 @@ form_register.onsubmit = async (e) => {
     console.log(json)
     form_register.reset();
 
-    document.querySelector(".alert-success").classList.remove('d-none');
-    document.querySelector(".alert-success").classList.add('d-block');
-
     successNotification("Successfully registered account.");
   }
 
@@ -49,7 +49,7 @@ form_register.onsubmit = async (e) => {
     const json = await response.json();
 
     alert(json.message);
-    errorNotification(json.message);
+    errorNotification(json.message, 5);
 
   }
 
@@ -58,14 +58,14 @@ document.querySelector("#form_register button").disabled = false;
 document.querySelector("#form_register button").innerHTML = 'Create Account';
 };
 
-function successNotification(message = ''){
-  document.querySelector(".alert-success").classList.remove('d-none');
-  document.querySelector(".alert-success").classList.add('d-block');
-  document.querySelector(".alert-success").innerHTML = message;
-}
+// function successNotification(message = ''){
+//   document.querySelector(".alert-success").classList.remove('d-none');
+//   document.querySelector(".alert-success").classList.add('d-block');
+//   document.querySelector(".alert-success").innerHTML = message;
+// }
 
-function errorNotification(message = ''){
-  document.querySelector(".alert-danger").classList.remove('d-none');
-  document.querySelector(".alert-danger").classList.add('d-block');
-  document.querySelector(".alert-danger").innerHTML = message;
-}
+// function errorNotification(message = ''){
+//   document.querySelector(".alert-danger").classList.remove('d-none');
+//   document.querySelector(".alert-danger").classList.add('d-block');
+//   document.querySelector(".alert-danger").innerHTML = message;
+// }
