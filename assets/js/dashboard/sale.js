@@ -1,8 +1,10 @@
 import {
   backendURL,
+  showNavDealerPages,
   showNavAdminPages,
   successNotification,
   errorNotification,
+  getLoggedUser,
 } from "../utils/utils.js";
 
 // calling function - important to execute the code inside the function
@@ -11,11 +13,26 @@ getLoggedUser();
 // Get All Data
 getData();
 
+showNavDealerPages();
+
 showNavAdminPages();
+
+// Page Functionality
+const pageAction = async (e) => {
+  // Get url from data-url attribute within the btn_pagination anchor tag
+  const url = e.target.getAttribute("data-url");
+
+  // Get search keyword from the form
+  const formData = new FormData(form_search);
+  const brandKeyword = formData.get("brand");
+
+  // Refresh card list with the correct parameters
+  getData(url, brandKeyword);
+};
 
 async function getData(url = "", keyword = "") {
   // Add Loading if pagination or search is used; Remove if its not needed
-  if (url != "" || keyword != "") {
+  if (url !== "" || keyword !== "") {
     document.getElementById(
       "get_data"
     ).innerHTML = `<div class="col-sm-12 d-flex justify-content-center align-items-center">
@@ -36,11 +53,11 @@ async function getData(url = "", keyword = "") {
     (keyword != "" ? "keyword=" + keyword : "");
 
   // Get Property Owner API Endpoint; Caters search
-  const response = await fetch(backendURL + "/api/vehicle" + queryParams, {
+  const response = await fetch(backendURL + "/api/sale" + queryParams, {
     headers: {
       Accept: "application/json",
       Authorization: "Bearer " + localStorage.getItem("token"),
-      // "ngrok-skip-browser-warning": "69420", // Include ngrok bypass header directly
+      "ngrok-skip-browser-warning": "69420", // Include ngrok bypass header directly
     },
   });
 
@@ -68,43 +85,42 @@ async function getData(url = "", keyword = "") {
     json.data.forEach((element) => {
       const date = new Date(element.created_at).toLocaleString();
 
-      container += `<div class="col-lg-4 col-md-6 text-center">
-      <div class="card w-100 mt-3" data-id="${element.VIN}">
-      <h6 class="card-header bg-dark text-white"> ${element.models.model_name}</h6>
-      
-      <div class="row">
-          <div class="col-sm-12 d-flex align-items-center">
-          
-              <img class="rounded" src="${backendURL}/storage/${element.image}" width="100%" height="270px">
-          </div>
+      container += `<div class="col-sm-12">
+                    <div class="card w-100 mt-3" data-id="${element.sale_id}">
+                    
+                    <div class="row">
 
-          <div class="col-sm-12 text-start ms-3">
-              <div class="card-body">
 
-                  <div>
-                      
-                      <h6 class="card-title"><b>VIN:</b>     ${element.VIN}</h6>
-                      <h6 class="card-text"><b>Price:</b>     ${element.price}</h6>
-                      <h6 class="card-title"><b>Category:</b>     ${element.models.category}</h6>
-                      <h6 class="card-title"><b>Transmission:</b>     ${element.transmission}</h6>
-                      <h6 class="card-text"><b>Color:</b>     ${element.color}</h6>
-                      <h6 class="card-text"><b>Brand:</b>     ${element.models.brand.brand_name}</h6>
-                  </div>
-                  <h6 class="card-subtitle text-body-secondary mt-4">
-                      <!--<small><b>Date created:</b>     ${date}</small>-->
-                  </h6>
-              </div>
-          </div>
-          
-          <div class="col-sm-12 text-center mb-3">
-              <a class="col-sm-4 btn btn-danger" href="#" id="btn_edit" data-id="${element.VIN}">
-                  <i class="fa fa-shopping-bag"></i> Inquire
-              </a>
-          </div>
+                        <div class="col-sm-12">
+                        <div class="card-body">
+                                <div class="dropdown float-end">
+                                <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item" href="#" id="btn_edit" data-id="${element.sale_id}">Edit</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#" id="btn_delete" data-id="${element.sale_id}">Delete</a>
+                                    </li>
+                                </ul>
+                            </div>
 
-      </div>
-    </div>
-  </div>`;
+                            <div>
+                            <h6 class="card-title"><b>VIN:</b>     ${element.VIN}</h5>
+                            <h6 class="card-title"><b>Sale Date:</b>     ${element.sale_date}</h5>
+                            <h6 class="card-text"><b>Income:</b>     ${element.income}</h6>
+                            <h6 class="card-title"><b>Gender:</b>     ${element.gender}</h5>
+
+                            </div>
+                            <h6 class="card-subtitle text-body-secondary mt-4">
+                            <small><b>Date created:</b>     ${date}</small>
+                            </h6>
+                        </div>
+                        </div>
+                        
+
+                    </div>
+                  </div>`;
     });
 
     // Use the container to display the fetch data
@@ -162,17 +178,17 @@ form_search.onsubmit = async (e) => {
 
 //Store and Update Functionality Combined
 // Submit Form Functionality; This is for create and update
-const form_vehicles = document.getElementById("form_vehicles");
+const form_sales = document.getElementById("form_sales");
 
-form_vehicles.onsubmit = async (e) => {
+form_sales.onsubmit = async (e) => {
+  console.log("Form submitted"); // Add this line
   e.preventDefault();
 
   // Disable button
+  console.log("Disabling button"); // Add this line
+  document.querySelector("#form_sales button[type = 'submit']").disabled = true;
   document.querySelector(
-    "#form_vehicles button[type = 'submit']"
-  ).disabled = true;
-  document.querySelector(
-    "#form_vehicles button[type = 'submit']"
+    "#form_sales button[type = 'submit']"
   ).innerHTML = `<div class="col-sm-12 d-flex justify-content-center align-items-center">
       <div class="spinner-border" role="status">
           <span class="visually-hidden">Loading...</span>
@@ -181,28 +197,33 @@ form_vehicles.onsubmit = async (e) => {
   </div>`;
 
   //   Get values of form (input, textarea, select) put it as form-data
-  const formData = new FormData(form_vehicles);
+  const formData = new FormData(form_sales);
 
-  // Check Key/value pairs of form data; Uncomment to debug
-  // for (let [name, value] of formData) {
-  //   //key1 = value1, then key2 = value2
-  //   // Use for checking if the store property owner is working
-  //   console.log(`${name} = ${value}`);
-  // }
+  //   uncomment to debug, or see console log of date inputted by user
+  //   console.log('Form data:', formData); // Add this line
+
+  // Get the value of sale_date
+  const saleDate = formData.get("sale_date");
+
+  // Convert the date to the "year-month-day" format
+  const formattedSaleDate = new Date(saleDate).toISOString().split("T")[0];
+
+  // Set the formatted date back to the form data
+  formData.set("sale_date", formattedSaleDate);
 
   let response;
   // Check if for_update_id is empty; If it is empty then it's create, else it's update
   if (for_update_id == "") {
-    // const id = document.querySelector('#form_vehicles input[type="hidden"]').value;
+    // const id = document.querySelector('#form_sales input[type="hidden"]').value;
     // const forUpdate = id.length > 0 ? true : false;
 
     //   fetch API property owner store endpoint
-    response = await fetch(backendURL + "/api/inventory", {
+    response = await fetch(backendURL + "/api/sale", {
       method: "POST",
       headers: {
         Accept: "application/json",
         Authorization: "Bearer " + localStorage.getItem("token"),
-        // "ngrok-skip-browser-warning": "69420", // Include ngrok bypass header directly
+        "ngrok-skip-browser-warning": "69420", // Include ngrok bypass header directly
       },
       body: formData,
     });
@@ -214,12 +235,12 @@ form_vehicles.onsubmit = async (e) => {
     // formData.append("_method", "PUT");
 
     //   fetch API property owner update endpoint
-    response = await fetch(backendURL + "/api/inventory/" + for_update_id, {
+    response = await fetch(backendURL + "/api/sale/" + for_update_id, {
       method: "PUT", //Change to POST if with Image Upload
       headers: {
         Accept: "application/json",
         Authorization: "Bearer " + localStorage.getItem("token"),
-        // "ngrok-skip-browser-warning": "69420", // Include ngrok bypass header directly
+        "ngrok-skip-browser-warning": "69420", // Include ngrok bypass header directly
       },
       // Uncomment body below; If with Image Upload
       // body: formData,
@@ -235,7 +256,7 @@ form_vehicles.onsubmit = async (e) => {
   //   console.log(`${name} = ${value}`);
   // }
 
-  // const id = document.querySelector('#form_vehicles input[type="hidden"]').value;
+  // const id = document.querySelector('#form_sales input[type="hidden"]').value;
   // const forUpdate = id.length > 0 ? true : false;
 
   // Get response if 200-299 status code
@@ -245,20 +266,23 @@ form_vehicles.onsubmit = async (e) => {
     // console.log(json);
 
     // Reset Form
-    form_vehicles.reset();
+    form_sales.reset();
 
     // // Refresh the page
-    // location.reload(10);
+    // location.reload();
 
     successNotification(
       "Successfully" +
         (for_update_id == "" ? " created" : " updated") +
-        " inventory.",
+        " supplier.",
       10
     );
 
     // Close Modal
     document.getElementById("modal_close").click();
+
+    // reset to null the for_update_id
+    for_update_id = "";
 
     // Reload Page
     getData();
@@ -278,10 +302,8 @@ form_vehicles.onsubmit = async (e) => {
   // Always reset for_update_id to empty string
   for_update_id = "";
 
-  document.querySelector(
-    "#form_vehicles button[type='submit']"
-  ).disabled = false;
-  document.querySelector("#form_vehicles button[type='submit']").innerHTML =
+  document.querySelector("#form_sales button[type='submit']").disabled = false;
+  document.querySelector("#form_sales button[type='submit']").innerHTML =
     "Submit";
 };
 
@@ -290,34 +312,40 @@ const deleteAction = async (e) => {
   // Get Id from data Id attribute within the btn_delete anchor tag
   const id = e.target.getAttribute("data-id");
 
-  // Background red the card that you want to delete
-  document.querySelector(`.card[data-id="${id}"]`).style.backgroundColor =
-    "red";
+  // Open the delete confirmation modal
+  const deleteConfirmationModal = new bootstrap.Modal(
+    document.getElementById("deleteConfirmationModal")
+  );
+  deleteConfirmationModal.show();
 
-  //   fetch API property owner delete endpoint
-  const response = await fetch(backendURL + "/api/inventory/" + id, {
-    method: "DELETE",
-    headers: {
-      Accept: "application/json",
-      Authorization: "Bearer " + localStorage.getItem("token"),
-      "ngrok-skip-browser-warning": "69420", // Include ngrok bypass header directly
-    },
-  });
+  // Set up the event listener for the confirm delete button in the modal
+  const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
+  confirmDeleteBtn.addEventListener("click", async () => {
+    // Background red the card that you want to delete
+    document.querySelector(`.card[data-id="${id}"]`).style.backgroundColor =
+      "red";
 
-  // Use JS confirm to ask for confirmation; You can use bootstrap modal instead of this
-  if (confirm("Are you sure you want to delete?")) {
+    // Fetch API property owner delete endpoint
+    const response = await fetch(backendURL + "/api/sale/" + id, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+        "ngrok-skip-browser-warning": "69420", // Include ngrok bypass header directly
+      },
+    });
+
     // Get response if 200-299 status code
     if (response.ok) {
       // Uncomment for debugging purpose
       // const json = await response.json();
       // console.log(json);
 
-      successNotification("Successfully deleted property owner", 10);
+      successNotification("Successfully deleted supplier", 10);
 
       // Remove the card from the list
       document.querySelector(`.card[data-id="${id}"]`).remove();
     }
-
     // Get response if 400+ or 500+
     else {
       errorNotification("Unable to delete!", 10);
@@ -326,16 +354,25 @@ const deleteAction = async (e) => {
       document.querySelector(`.card[data-id="${id}"]`).style.backgroundColor =
         "white";
     }
-  }
+
+    // Close the delete confirmation modal
+    deleteConfirmationModal.hide();
+  });
 };
 
-//Update Functionality
+// Update Functionality
 const editAction = async (e) => {
   // Get Id from data Id attribute within the btn_delete anchor tag
   const id = e.target.getAttribute("data-id");
 
+  // Reset the for_update_id variable
+  for_update_id = "";
+
   // Show Functionality Function Call
-  showData(id);
+  await showData(id);
+
+  // Set the for_update_id variable with the correct ID
+  for_update_id = id;
 
   // Show Modal Form
   document.getElementById("modal_show").click();
@@ -347,14 +384,14 @@ let for_update_id = "";
 // Show Functionality
 const showData = async (id) => {
   // Background Yellow the card you want to delete
-  document.querySelector(`.card[data-id="${id}"]`).style.borderColor = "red";
+  document.querySelector(`.card[data-id="${id}"]`).style.borderColor = "blue";
 
   // Fetch API Dealer show endpoint
-  const response = await fetch(backendURL + "/api/vehicle/dealer/" + id, {
+  const response = await fetch(backendURL + "/api/sale/" + id, {
     headers: {
       Accept: "application/json",
       Authorization: "Bearer " + localStorage.getItem("token"),
-      // "ngrok-skip-browser-warning": "69420", // Include ngrok bypass header directly
+      "ngrok-skip-browser-warning": "69420", // Include ngrok bypass header directly
     },
   });
 
@@ -363,37 +400,18 @@ const showData = async (id) => {
     const json = await response.json();
     console.log(json);
 
-    // Store id to a variable; id will be utilize for update
+    // Store id to a variable; id will be utilized for update
     for_update_id = json.id;
 
     // Display json response to Form tags; make sure to set id attribute on tags (input, textarea, select)
-    document.getElementById("dealer_name").value = "";
-    document.getElementById("area").value = "";
-    document.getElementById("address").value = "";
-    document.getElementById("phone").value = "";
-
-    // Display dealer information
-    let dealerContainer = "";
-    const propertiesToShow = ["dealer_name", "area", "address", "phone"];
-
-    for (const key of propertiesToShow) {
-      if (json.dealer.hasOwnProperty(key)) {
-        dealerContainer += `
-                <div class="row mb-3">
-                    <div class="col-sm-3">
-                        <label for="">${key}:</label>
-                    </div>
-                    <div class="col-sm-9">
-                        ${json.dealer[key]}
-                    </div>
-                </div>`;
-      }
-    }
-
-    document.getElementById("dealer_container").innerHTML = dealerContainer;
+    document.getElementById("sale_date").value = json.sale_date;
+    document.getElementById("income").value = json.income;
+    document.getElementById("gender").value = json.gender;
+    document.getElementById("customer_id").value = json.customer_id;
+    document.getElementById("VIN").value = json.VIN;
 
     // Change Button Description; You can also use textContent instead of innerHTML
-    document.querySelector("#form_vehicles button[type='submit']").innerHTML =
+    document.querySelector("#form_sales button[type='submit']").innerHTML =
       "Update Info";
   }
 
@@ -407,57 +425,4 @@ const showData = async (id) => {
   }
 };
 
-// Page Functionality
-const pageAction = async (e) => {
-  // Get url from data-url attribute within the btn_pagination anchor tag
-  const url = e.target.getAttribute("data-url");
-
-  // Get search keyword from the form
-  const formData = new FormData(form_search);
-  const brandKeyword = formData.get("brand");
-
-  // Refresh card list with the correct parameters
-  getData(url, brandKeyword);
-};
-
-// Get Logged User
-async function getLoggedUser() {
-  // const ngrokBypassHeader = new Headers({
-  //   "ngrok-skip-browser-warning": "69420",
-  // });
-  // Ngrok bypass code
-  // const ngrokBypassHeader = new Headers({
-  // "ngrok-skip-browser-warning": "69420",
-  // });
-  // Access User Profile API Endpoint
-  const response = await fetch(backendURL + "/api/profile/show", {
-    headers: {
-      Accept: "application/json",
-      Authorization: "Bearer " + localStorage.getItem("token"),
-      "ngrok-skip-browser-warning": "69420", // Include ngrok bypass header directly
-    },
-  });
-
-  // Get response if 200-299 status code
-  if (response.ok) {
-    const json = await response.json();
-
-    console.log(json);
-
-    document.getElementById("user_logged_name").innerHTML =
-      json.firstname + " " + json.lastname;
-
-    // Sets value to the input field with id "user_id"
-    if (document.getElementById("user_id")) {
-      document.getElementById("user_id").value = json.id;
-    }
-  }
-
-  // Get response if 400 or 500 status code
-  else {
-    const json = await response.json();
-
-    errorNotification(json.message, 10);
-  }
-}
 export { getData };

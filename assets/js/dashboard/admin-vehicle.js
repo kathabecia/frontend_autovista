@@ -1,8 +1,10 @@
 import {
   backendURL,
+  showNavDealerPages,
   showNavAdminPages,
   successNotification,
   errorNotification,
+  getLoggedUser,
 } from "../utils/utils.js";
 
 // calling function - important to execute the code inside the function
@@ -11,11 +13,26 @@ getLoggedUser();
 // Get All Data
 getData();
 
+showNavDealerPages();
+
 showNavAdminPages();
+
+// Page Functionality
+const pageAction = async (e) => {
+  // Get url from data-url attribute within the btn_pagination anchor tag
+  const url = e.target.getAttribute("data-url");
+
+  // Get search keyword from the form
+  const formData = new FormData(form_search);
+  const brandKeyword = formData.get("brand");
+
+  // Refresh card list with the correct parameters
+  getData(url, brandKeyword);
+};
 
 async function getData(url = "", keyword = "") {
   // Add Loading if pagination or search is used; Remove if its not needed
-  if (url != "" || keyword != "") {
+  if (url !== "" || keyword !== "") {
     document.getElementById(
       "get_data"
     ).innerHTML = `<div class="col-sm-12 d-flex justify-content-center align-items-center">
@@ -36,11 +53,11 @@ async function getData(url = "", keyword = "") {
     (keyword != "" ? "keyword=" + keyword : "");
 
   // Get Property Owner API Endpoint; Caters search
-  const response = await fetch(backendURL + "/api/vehicle" + queryParams, {
+  const response = await fetch(backendURL + "/api/vehicle/all" + queryParams, {
     headers: {
       Accept: "application/json",
       Authorization: "Bearer " + localStorage.getItem("token"),
-      // "ngrok-skip-browser-warning": "69420", // Include ngrok bypass header directly
+      "ngrok-skip-browser-warning": "69420", // Include ngrok bypass header directly
     },
   });
 
@@ -68,43 +85,45 @@ async function getData(url = "", keyword = "") {
     json.data.forEach((element) => {
       const date = new Date(element.created_at).toLocaleString();
 
-      container += `<div class="col-lg-4 col-md-6 text-center">
-      <div class="card w-100 mt-3" data-id="${element.VIN}">
-      <h6 class="card-header bg-dark text-white"> ${element.models.model_name}</h6>
-      
-      <div class="row">
-          <div class="col-sm-12 d-flex align-items-center">
-          
-              <img class="rounded" src="${backendURL}/storage/${element.image}" width="100%" height="270px">
-          </div>
+      container += `<div class="col-sm-12">
+                    <div class="card w-100 mt-3" data-id="${element.VIN}">
+                    
+                    <div class="row">
+                        <div class="col-sm-4 d-flex align-items-center">
+                            <img class="rounded" src="${backendURL}/storage/${element.image}" width="100%" height="270px">
+                        </div>
 
-          <div class="col-sm-12 text-start ms-3">
-              <div class="card-body">
+                        <div class="col-sm-8">
+                        <div class="card-body">
+                                <div class="dropdown float-end">
+                                <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item" href="#" id="btn_edit" data-id="${element.VIN}">Edit</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#" id="btn_delete" data-id="${element.VIN}">Delete</a>
+                                    </li>
+                                </ul>
+                            </div>
 
-                  <div>
-                      
-                      <h6 class="card-title"><b>VIN:</b>     ${element.VIN}</h6>
-                      <h6 class="card-text"><b>Price:</b>     ${element.price}</h6>
-                      <h6 class="card-title"><b>Category:</b>     ${element.models.category}</h6>
-                      <h6 class="card-title"><b>Transmission:</b>     ${element.transmission}</h6>
-                      <h6 class="card-text"><b>Color:</b>     ${element.color}</h6>
-                      <h6 class="card-text"><b>Brand:</b>     ${element.models.brand.brand_name}</h6>
-                  </div>
-                  <h6 class="card-subtitle text-body-secondary mt-4">
-                      <!--<small><b>Date created:</b>     ${date}</small>-->
-                  </h6>
-              </div>
-          </div>
-          
-          <div class="col-sm-12 text-center mb-3">
-              <a class="col-sm-4 btn btn-danger" href="#" id="btn_edit" data-id="${element.VIN}">
-                  <i class="fa fa-shopping-bag"></i> Inquire
-              </a>
-          </div>
+                            <div>
+                            <h6 class="card-title"><b>VIN:</b>     ${element.VIN}</h5>
+                            
+                            <h6 class="card-text"><b>Price:</b>     ${element.price}</h6>
+                            <h6 class="card-text"><b>Transmission:</b>     ${element.transmission}</h6>
+                            <h6 class="card-title"><b>Color:</b>     ${element.color}</h5>
+                            
+                            </div>
+                            <h6 class="card-subtitle text-body-secondary mt-4">
+                            <small><b>Date created:</b>     ${date}</small>
+                            </h6>
+                        </div>
+                        </div>
+                        
 
-      </div>
-    </div>
-  </div>`;
+                    </div>
+                  </div>`;
     });
 
     // Use the container to display the fetch data
@@ -197,12 +216,12 @@ form_vehicles.onsubmit = async (e) => {
     // const forUpdate = id.length > 0 ? true : false;
 
     //   fetch API property owner store endpoint
-    response = await fetch(backendURL + "/api/inventory", {
+    response = await fetch(backendURL + "/api/vehicle", {
       method: "POST",
       headers: {
         Accept: "application/json",
         Authorization: "Bearer " + localStorage.getItem("token"),
-        // "ngrok-skip-browser-warning": "69420", // Include ngrok bypass header directly
+        "ngrok-skip-browser-warning": "69420", // Include ngrok bypass header directly
       },
       body: formData,
     });
@@ -211,20 +230,20 @@ form_vehicles.onsubmit = async (e) => {
   // For Update
   else {
     // Add Method Spoofing to cater Image Upload; Cause you are using FormData; Uncomment if necessary
-    // formData.append("_method", "PUT");
+    formData.append("_method", "PUT");
 
     //   fetch API property owner update endpoint
-    response = await fetch(backendURL + "/api/inventory/" + for_update_id, {
-      method: "PUT", //Change to POST if with Image Upload
+    response = await fetch(backendURL + "/api/vehicle/" + for_update_id, {
+      method: "POST", //Change to POST if with Image Upload
       headers: {
         Accept: "application/json",
         Authorization: "Bearer " + localStorage.getItem("token"),
-        // "ngrok-skip-browser-warning": "69420", // Include ngrok bypass header directly
+        "ngrok-skip-browser-warning": "69420", // Include ngrok bypass header directly
       },
       // Uncomment body below; If with Image Upload
-      // body: formData,
+      body: formData,
       // Comment body below; if with Image Upload
-      body: new URLSearchParams(formData),
+      // body: new URLSearchParams(formData),
     });
   }
 
@@ -248,17 +267,20 @@ form_vehicles.onsubmit = async (e) => {
     form_vehicles.reset();
 
     // // Refresh the page
-    // location.reload(10);
+    // location.reload();
 
     successNotification(
       "Successfully" +
         (for_update_id == "" ? " created" : " updated") +
-        " inventory.",
+        " vehicle.",
       10
     );
 
     // Close Modal
     document.getElementById("modal_close").click();
+
+    // reset to null the for_update_id
+    for_update_id = "";
 
     // Reload Page
     getData();
@@ -290,34 +312,40 @@ const deleteAction = async (e) => {
   // Get Id from data Id attribute within the btn_delete anchor tag
   const id = e.target.getAttribute("data-id");
 
-  // Background red the card that you want to delete
-  document.querySelector(`.card[data-id="${id}"]`).style.backgroundColor =
-    "red";
+  // Open the delete confirmation modal
+  const deleteConfirmationModal = new bootstrap.Modal(
+    document.getElementById("deleteConfirmationModal")
+  );
+  deleteConfirmationModal.show();
 
-  //   fetch API property owner delete endpoint
-  const response = await fetch(backendURL + "/api/inventory/" + id, {
-    method: "DELETE",
-    headers: {
-      Accept: "application/json",
-      Authorization: "Bearer " + localStorage.getItem("token"),
-      "ngrok-skip-browser-warning": "69420", // Include ngrok bypass header directly
-    },
-  });
+  // Set up the event listener for the confirm delete button in the modal
+  const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
+  confirmDeleteBtn.addEventListener("click", async () => {
+    // Background red the card that you want to delete
+    document.querySelector(`.card[data-id="${id}"]`).style.backgroundColor =
+      "red";
 
-  // Use JS confirm to ask for confirmation; You can use bootstrap modal instead of this
-  if (confirm("Are you sure you want to delete?")) {
+    // Fetch API property owner delete endpoint
+    const response = await fetch(backendURL + "/api/vehicle/" + id, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+        "ngrok-skip-browser-warning": "69420", // Include ngrok bypass header directly
+      },
+    });
+
     // Get response if 200-299 status code
     if (response.ok) {
       // Uncomment for debugging purpose
       // const json = await response.json();
       // console.log(json);
 
-      successNotification("Successfully deleted property owner", 10);
+      successNotification("Successfully deleted vehicle", 10);
 
       // Remove the card from the list
       document.querySelector(`.card[data-id="${id}"]`).remove();
     }
-
     // Get response if 400+ or 500+
     else {
       errorNotification("Unable to delete!", 10);
@@ -326,16 +354,25 @@ const deleteAction = async (e) => {
       document.querySelector(`.card[data-id="${id}"]`).style.backgroundColor =
         "white";
     }
-  }
+
+    // Close the delete confirmation modal
+    deleteConfirmationModal.hide();
+  });
 };
 
-//Update Functionality
+// Update Functionality
 const editAction = async (e) => {
   // Get Id from data Id attribute within the btn_delete anchor tag
   const id = e.target.getAttribute("data-id");
 
+  // Reset the for_update_id variable
+  for_update_id = "";
+
   // Show Functionality Function Call
-  showData(id);
+  await showData(id);
+
+  // Set the for_update_id variable with the correct ID
+  for_update_id = id;
 
   // Show Modal Form
   document.getElementById("modal_show").click();
@@ -347,14 +384,14 @@ let for_update_id = "";
 // Show Functionality
 const showData = async (id) => {
   // Background Yellow the card you want to delete
-  document.querySelector(`.card[data-id="${id}"]`).style.borderColor = "red";
+  document.querySelector(`.card[data-id="${id}"]`).style.borderColor = "blue";
 
   // Fetch API Dealer show endpoint
-  const response = await fetch(backendURL + "/api/vehicle/dealer/" + id, {
+  const response = await fetch(backendURL + "/api/vehicle/" + id, {
     headers: {
       Accept: "application/json",
       Authorization: "Bearer " + localStorage.getItem("token"),
-      // "ngrok-skip-browser-warning": "69420", // Include ngrok bypass header directly
+      "ngrok-skip-browser-warning": "69420", // Include ngrok bypass header directly
     },
   });
 
@@ -363,38 +400,36 @@ const showData = async (id) => {
     const json = await response.json();
     console.log(json);
 
-    // Store id to a variable; id will be utilize for update
+    // Store id to a variable; id will be utilized for update
     for_update_id = json.id;
 
     // Display json response to Form tags; make sure to set id attribute on tags (input, textarea, select)
-    document.getElementById("dealer_name").value = "";
-    document.getElementById("area").value = "";
-    document.getElementById("address").value = "";
-    document.getElementById("phone").value = "";
-
-    // Display dealer information
-    let dealerContainer = "";
-    const propertiesToShow = ["dealer_name", "area", "address", "phone"];
-
-    for (const key of propertiesToShow) {
-      if (json.dealer.hasOwnProperty(key)) {
-        dealerContainer += `
-                <div class="row mb-3">
-                    <div class="col-sm-3">
-                        <label for="">${key}:</label>
-                    </div>
-                    <div class="col-sm-9">
-                        ${json.dealer[key]}
-                    </div>
-                </div>`;
-      }
-    }
-
-    document.getElementById("dealer_container").innerHTML = dealerContainer;
+    document.getElementById("price").value = json.price;
+    document.getElementById("transmission").value = json.transmission;
+    document.getElementById("color").value = json.color;
+    document.getElementById("model_id").value = json.model_id;
+    document.getElementById("brand_id").value = json.brand_id;
+    document.getElementById("dealer_id").value = json.dealer_id;
 
     // Change Button Description; You can also use textContent instead of innerHTML
     document.querySelector("#form_vehicles button[type='submit']").innerHTML =
       "Update Info";
+
+    // Handle file input separately if it's a file input
+    const imageInput = document.getElementById("image");
+
+    if (imageInput) {
+      // Check if the imagePreview element exists
+      const imagePreview = document.getElementById("imagePreview");
+      if (imagePreview) {
+        // You might want to display the image or handle it in a different way
+        // This is just an example, you might need to adapt this to your use case
+        imagePreview.src = backendURL + "/storage/" + json.image;
+      }
+    } else {
+      // Otherwise, set the value as usual
+      document.getElementById("image").value = json.image;
+    }
   }
 
   // Get response if 400+ or 500+
@@ -407,57 +442,4 @@ const showData = async (id) => {
   }
 };
 
-// Page Functionality
-const pageAction = async (e) => {
-  // Get url from data-url attribute within the btn_pagination anchor tag
-  const url = e.target.getAttribute("data-url");
-
-  // Get search keyword from the form
-  const formData = new FormData(form_search);
-  const brandKeyword = formData.get("brand");
-
-  // Refresh card list with the correct parameters
-  getData(url, brandKeyword);
-};
-
-// Get Logged User
-async function getLoggedUser() {
-  // const ngrokBypassHeader = new Headers({
-  //   "ngrok-skip-browser-warning": "69420",
-  // });
-  // Ngrok bypass code
-  // const ngrokBypassHeader = new Headers({
-  // "ngrok-skip-browser-warning": "69420",
-  // });
-  // Access User Profile API Endpoint
-  const response = await fetch(backendURL + "/api/profile/show", {
-    headers: {
-      Accept: "application/json",
-      Authorization: "Bearer " + localStorage.getItem("token"),
-      "ngrok-skip-browser-warning": "69420", // Include ngrok bypass header directly
-    },
-  });
-
-  // Get response if 200-299 status code
-  if (response.ok) {
-    const json = await response.json();
-
-    console.log(json);
-
-    document.getElementById("user_logged_name").innerHTML =
-      json.firstname + " " + json.lastname;
-
-    // Sets value to the input field with id "user_id"
-    if (document.getElementById("user_id")) {
-      document.getElementById("user_id").value = json.id;
-    }
-  }
-
-  // Get response if 400 or 500 status code
-  else {
-    const json = await response.json();
-
-    errorNotification(json.message, 10);
-  }
-}
 export { getData };

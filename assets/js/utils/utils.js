@@ -51,19 +51,63 @@ async function getLoggedUser() {
   }
 }
 
+//Show Dealers Pages
+function showNavDealerPages() {
+  if (localStorage.getItem("role") == "Dealer") {
+    document.getElementById(
+      "nav_dealer_pages"
+    ).innerHTML = `<div class="sb-sidenav-menu-heading">Dealer Pages</div>
+    <a class="nav-link" href="my-inventory.html">
+        <div class="sb-nav-link-icon"><i class="fas fa-boxes"></i></div>
+        My Inventory
+    </a>`;
+
+    // Highlight the active page
+    var currentPageUrl = window.location.href;
+    var navLinks = document.querySelectorAll("#nav_admin_pages .nav-link");
+
+    navLinks.forEach(function (link) {
+      if (link.href === currentPageUrl) {
+        link.classList.add("active");
+      }
+    });
+  }
+}
+
 // Show Admin Pages
 function showNavAdminPages() {
-  if (
-    localStorage.getItem("role") == "Dealer" ||
-    localStorage.getItem("role") == "Admin"
-  ) {
+  if (localStorage.getItem("role") == "Admin") {
     document.getElementById(
       "nav_admin_pages"
-    ).innerHTML = `<div class="sb-sidenav-menu-heading">Dealer Pages</div>
-    <a class="nav-link" href="users.html">
+    ).innerHTML = `<div class="sb-sidenav-menu-heading">Admin Pages</div>
+    <a class="nav-link" href="user.html">
         <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
         Users
-    </a>`;
+    </a>
+         <a class="nav-link" href="model.html">
+        <div class="sb-nav-link-icon"><i class="fa-solid fa-car-side"></i></div>
+        Models 
+    </a>
+    <a class="nav-link" href="admin-vehicle.html">
+        <div class="sb-nav-link-icon"><i class="fa-solid fa-car"></i></div>
+        Vehicles
+    </a>
+
+    <a class="nav-link" href="supplier.html">
+        <div class="sb-nav-link-icon"><i class="fa-solid fa-truck-field"></i></div>
+        Suppliers 
+    </a>
+    `;
+
+    // Highlight the active page
+    var currentPageUrl = window.location.href;
+    var navLinks = document.querySelectorAll("#nav_admin_pages .nav-link");
+
+    navLinks.forEach(function (link) {
+      if (link.href === currentPageUrl) {
+        link.classList.add("active");
+      }
+    });
   }
 }
 
@@ -100,4 +144,5 @@ export {
   errorNotification,
   getLoggedUser,
   showNavAdminPages,
+  showNavDealerPages,
 };

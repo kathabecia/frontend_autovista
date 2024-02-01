@@ -6,13 +6,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Vehicle</title>
+        <title>Supplier</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="assets/css/dashboard.css" rel="stylesheet" />
+        <!-- <link rel="stylesheet" href="css/custom.css"> -->
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <script src="assets/js/utils/scripts.js" defer></script>
-        <script type="module" src="assets/js/utils/utils.js"></script>
-        <script type="module" src="assets/js/dashboard/vehicle.js"></script>
+        <!-- <script type="module" src="js/utils/utils.js"></script> -->
+        <script type="module" src="assets/js/dashboard/supplier.js"></script>
         <script type="module" src="assets/js/dashboard/dashboard.js"></script>
     </head>
     <body class="sb-nav-fixed">
@@ -34,8 +35,8 @@
                 <li class="nav-item dropdown">
                      <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
                     aria-expanded="false">
-                    <!-- <img src="assets/img/profile-image.jpg" class="rounded-circle fit-image" alt="User Image"> -->
                     <img class="rounded-circle fit-image" id="user_logged_image" src="" alt="User Image">
+
                 </a>
                     <!-- <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a> -->
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="na /vbarDropdown">
@@ -44,6 +45,11 @@
                 </li>
             </ul>
         </nav>
+        <div class="sb-sidenav-footer">
+                <div class="small">Logged in as:</div>
+                <span id="user_logged_name"></span>
+            </div>
+        
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
@@ -60,146 +66,109 @@
                                 Charts
                             </a> -->
                             <a class="nav-link" href="vehicle.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-car"></i></i></div>
-                                Automobile
+                                <div class="sb-nav-link-icon"><i class="fas fa-car"></i></div>
+                                Vehicles
                             </a>
                             <a class="nav-link" href="dealer.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-search-location"></i></div>
-                                Find a Dealer
+                                Dealer Locator
                             </a>
                             <a class="nav-link" href="inventory.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-clipboard-list"></i></div>
-                                Check Inventory
+                                Dealer Inventory
                             </a>
+                            <!-- Dealer Pages -->
+                            <div id="nav_dealer_pages"></div>
+                            <!-- End of Dealer Pages -->
+
                             <!-- Admin Pages -->
                             <div id="nav_admin_pages"></div>
                             <!-- End of Admin Pages -->
                         </div>
                     </div>
-                    <div class="sb-sidenav-footer">
+                    <!-- <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
                         <span id="user_logged_name"></span>
-                    </div>
+                    </div> -->
                 </nav>
             </div>
             <div id="layoutSidenav_content">
-                <div class="breadcrumbs">
-                    <div class="page-header d-flex align-items-center" style="background-image: url('assets/img/brand-bg\ .jpg');">
-                      <div class=" ms-3 container position-relative">
-                        <h1 class="text-light">Vehicles</h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="dashboard.html">Profile</a></li>
-                            <li class="breadcrumb-item active">Vehicles</li>
-                        </ol>
-                      </div>
-                    </div>
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Suppliers</h1>
+                    <ol class="breadcrumb mb-4">
+                        <!-- <li class="breadcrumb-item"><a href="dashboard.html">Profile</a></li> -->
+                        <li class="breadcrumb-item"><a href="user.html">Users</a></li>
+                        <li class="breadcrumb-item"><a href="admin-vehicle.html">Vehicles</a></li>
+                        <li class="breadcrumb-item active">Suppliers</li>
+                    </ol>
 
-
-        <!--Brand Logo Section -->
-
-            <div class="container-fluid px-4">
-            <section id="clients" class="clients section-bg">
-            <div class="container">
-      
-              <div class="row" data-aos="zoom-in">
-                <div class="col-lg-2">
-                </div>
-      
-                <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                  <img src="assets/img/brands/ford.png" class="img-fluid" alt="">
-                </div>
-      
-                <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                  <img src="assets/img/brands/honda(1).png" class="img-fluid" alt="">
-                </div>
-      
-                <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                  <img src="assets/img/brands/suzuki.png" class="img-fluid" alt="">
-                </div>
-      
-                <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                  <img src="assets/img/brands/Toyota.png" class="img-fluid" alt="">
-                </div>
-      
-                </div>
-      
-              </div>
-      <hr>
-            </div>
-          </section>
-          
-          <!-- End Brand Logo Section -->
+                    <!-- Search Bar -->
+                        <form id="form_search" class="d-flex align-items-center  ms-5">
+                            <div class="col-sm-4">
+                            <input class="form-control rounded-pill" type="text" name="brand" id="brand" placeholder="Search a Name">
+                            </div>
+                            <div class="col-sm-2">
+                                <button class="btn btn-primary mx-2" type="submit">Search</button>
+                            </div>
+                        </form>
 
                     
-                    <!-- Modal  -->
+                    <!-- Modal -->
                     <div class="modal fade" id="form_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Vehicle Form</h1>
-                                    <button type="button" 
-                                    class="btn-close" 
-                                    data-bs-dismiss="modal" 
-                                    aria-label="Close"></button>
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Supplier Form</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <!-- Input Form -->
-                                <form id="form_vehicles">
+                                <form id="form_suppliers">
                                     <!-- Modal Body -->
                                     <div class="modal-body">
                                         <input type="hidden" name="user_id" id="user_id"/>
                                         <!-- Dealer Field -->
-                                        <div class="row mb-3">
-                                            <div class="col-sm-3">
-                                            <label for="">Dealer:</label>
+                                        <div class="row mb-2">
+                                            <div class="col-sm-3 mt-1">
+                                                <label for="supplier_name">Supplier:</label>
                                             </div>
                                             <div class="col-sm-9">
-                                            <input class="form-control" type="text" name="dealer_name" id="dealer_name" required>
+                                            <input class="form-control" type="text" name="supplier_name" id="supplier_name" required>
                                             </div>
                                         </div>
                                         <!-- Area Field -->
-                                        <div class="row mb-3">
-                                            <div class="col-sm-3">
-                                            <label for="">Area:</label>
+                                        <div class="row mb-2">
+                                            <div class="col-sm-3 mt-1">
+                                                <label for="part">Part:</label>
                                             </div>
                                             <div class="col-sm-9">
-                                            <input class="form-control" type="text" name="area" id="area" required>
+                                            <input class="form-control" type="text" name="part" id="part" required>
                                             </div>
                                         </div>
-                                        <!-- Address Field -->
-                                        <div class="row mb-3">
-                                            <div class="col-sm-3">
-                                            <label for="">Address:</label>
+                                        <div class="row mb-2">
+                                            <div class="col-sm-3 mt-1">
+                                                <label for="model_id">Model:</label>
                                             </div>
                                             <div class="col-sm-9">
-                                            <input class="form-control" type="text" name="address" id="address" required>
+                                                <select class="form-control" name="model_id" id="model_id" required>
+                                                    <option disabled selected >Choose model...</option>
+                                                    <option value="1">Ranger Wildtrak / Truck</option>
+                                                    <option value="2">Ranger Sports / Truck</option>
+                                                    <option value="3">Ranger XLT / Truck</option>
+                                                    <option value="4">Ranger  Raptor / Truck</option>
+                                                    <option value="5">XL7 / SUV</option>
+                                                    <option value="7">Fortuner / SUV</option>
+                                                    <option value="8">Lite Ace Van / Van</option>
+                                                    <option value="9">GL Grandia / Van</option>
+                                                    <option value="10">Next Gen Territory / SUV</option>
+                                                    <option value="14">Corolla Altis / Sedan</option>
+                                                    <option value="15">City Hatchback / Hatchback</option>
+                                                    <option value="16">Ford Mustang / Convertible</option>
+                                                    <option value="17">Vios / Sedan</option>
+                                                </select>
                                             </div>
                                         </div>
-                                        <!-- Phone Field -->
-                                        <div class="row mb-3">
-                                            <div class="col-sm-3">
-                                            <label for="">Phone:</label>
-                                            </div>
-                                            <div class="col-sm-9">
-                                            <!-- <input class="form-control" type="text" name="phone" id="phone" required> -->
-                                            <a href="tel:+1234567890" name="phone" id="phone" class="form-control">+1234567890</a>
-                                            </div>
-                                        </div>
-                                        
-                                        <!-- Your HTML content -->
-                                        <div id="dealer_container"></div>
-                                        
-                                        <!-- Image File Field -->
-                                        <!-- <div class="row mb-3">
-                                            <div class="col-sm-12">
-                                            <input
-                                                class="form-control"
-                                                type="file"
-                                                name="image"
-                                                accept="image/*"
-                                                
-                                            />
-                                            </div>
-                                        </div> -->
+
+
                                     </div>
                                     <!-- End of Modal Body -->
 
@@ -216,21 +185,35 @@
                     </div>
                     <!-- End of Modal -->
 
-                    <!-- Search Form -->
-                    <form id="form_search" class="d-flex align-items-center  ms-5">
-                        <div class="col-sm-4">
-                            <input class="form-control"
-                             type="text" name="brand" id="brand" placeholder="Search by Brand">
+
+                        <!-- Modal for Delete Confirmation -->
+                        <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="deleteConfirmationModalLabel">Delete Confirmation</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                Are you sure you want to delete this supplier?
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+                                </div>
+                            </div>
+                            </div>
                         </div>
-                        <div class="col-sm-2">
-                            <button class="btn btn-primary mx-2" type="submit">Search</button>
-                        </div>
+  
+
                         <!-- Button trigger modal -->
-                        <!-- <div class="col-sm-2 ms-auto ">
+                        <div class="col-sm-2 ms-auto">
                             <button id="modal_show" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#form_modal">
-                                Add Vehicles
+                                Add Supplier
                             </button>
-                        </div> -->
+                        </div>
+
+                        
                     </form>
                     
                     <!-- End of Search Form -->
@@ -244,17 +227,17 @@
                     <div class="alert alert-success d-none mb-2" role="alert"></div>
 
                     <!-- Get All Data -->
-                    <div class="row col-11 mx-5 " id="get_data">
-                        <div class="col-sm-12 d-flex justify-content-center align-items-center ">
+                    <div class="row" id="get_data">
+                        <div class="col-sm-12 d-flex justify-content-center align-items-center">
                             <div class="spinner-border" role="status">
                                 <span class="visually-hidden">Loading...</span>
                             </div>
-                            <b class="ms-3">Loading Data...</b>
-                        </div> 
+                            <b class="ms-2">Loading Data...</b>
+                        </div>
                     </div>
 
                     <!-- Pagination of All Data -->
-                    <div class="d-flex justify-content-center pt-5 pt-5">
+                    <div class="d-flex justify-content-center">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination" id="get_pagination"></ul>
                         </nav>
