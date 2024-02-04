@@ -15,7 +15,7 @@
       rel="stylesheet"
     />
     <link href="assets/css/dashboard.css" rel="stylesheet" />
-    <link rel="stylesheet" href="assets/css/custom.css" />
+
     <!-- Leaflet Start -->
     <link
       rel="stylesheet"
@@ -148,168 +148,111 @@
                     </div>
         <div class="container-fluid px-4">
           
-          
-          <!-- Modal -->
-          <div
-            class="modal fade"
-            id="form_modal"
-            data-bs-backdrop="static"
-            data-bs-keyboard="false"
-            tabindex="-1"
-            aria-labelledby="staticBackdropLabel"
-            aria-hidden="true"
-          >
-            <div class="modal-dialog modal-lg">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="staticBackdropLabel">
-                    Dealer Inventory List
-                  </h1>
-                  <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                  ></button>
-                </div>
-                <!-- Input Form -->
-                <form id="form_dealers">
-                  <!-- Modal Body -->
-                  <div class="modal-body">
-                    <input type="hidden" name="user_id" id="user_id" />
-                    <!-- Dealer Name Field -->
-                    <div class="row">
-                      <div class="col-sm-9">
-                        <input
-                          class="form-control"
-                          type="hidden"
-                          name="VIN"
-                          id="VIN"
-                          required
-                        />
-                      </div>
-                    </div>
-                    <!-- Area Field -->
-                    <div class="row">
-                      <div class="col-sm-9">
-                        <input
-                          class="form-control"
-                          type="hidden"
-                          name="model_name"
-                          id="model_name"
-                          required
-                        />
-                      </div>
-                    </div>
-                    <!-- Address Field -->
-                    <div class="row">
-                      <div class="col-sm-9">
-                        <input
-                          class="form-control"
-                          type="hidden"
-                          name="category"
-                          id="category"
-                          required
-                        />
-                      </div>
-                    </div>
-                    <!-- Phone Field -->
-                    <div class="row">
-                      <div class="col-sm-9">
-                        <input
-                          class="form-control"
-                          type="hidden"
-                          name="price"
-                          id="price"
-                          required
-                        />
-                      </div>
-                    </div>
-                    <!-- VIN Field -->
-                    <div class="row mb-3">
-                      <div class="col-sm-9">
-                        <input
-                          class="form-control"
-                          type="hidden"
-                          name="color"
-                          id="color"
-                          required
-                        />
-                      </div>
-                    </div>
-                    <!-- Manufacturer ID Field -->
-                    <div class="row">
-                      <div class="col-sm-9">
-                        <input
-                          class="form-control"
-                          type="hidden"
-                          name="stock"
-                          id="stock"
-                          required
-                        />
-                      </div>
-                    </div>
-                    <!-- Manufacturer ID Field -->
-                    <div class="row">
-                      <div class="col-sm-9">
-                        <input
-                          class="form-control"
-                          type="hidden"
-                          name="sales"
-                          id="sales"
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-9">
-                        <input
-                          class="form-control"
-                          type="hidden"
-                          name="dealer"
-                          id="dealer"
-                          required
-                        />
-                      </div>
-                    </div>
+            <!-- Modal -->
+                    <div class="modal fade" id="form_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Dealer Inventory List</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <!-- Input Form -->
+                                <form id="form_dealers">
+                                    <!-- Modal Body -->
+                                    <div class="modal-body">
+                                        <input type="hidden" name="user_id" id="user_id"/>
+                                        <!-- Dealer Name Field -->
+                                        <div class="row">
+                                            
+                                            <div class="col-sm-9">
+                                            <input class="form-control" type="hidden" name="VIN" id="VIN" required>
+                                            </div>
+                                        </div>
+                                        <!-- Area Field -->
+                                        <div class="row">
+                                            
+                                            <div class="col-sm-9">
+                                            <input class="form-control" type="hidden" name="model_name" id="model_name" required>
+                                            </div>  
+                                        </div>
+                                        <!-- Address Field -->
+                                        <div class="row">
+                                            
+                                            <div class="col-sm-9">
+                                            <input class="form-control" type="hidden" name="category" id="category" required>
+                                            </div>
+                                        </div>
+                                        <!-- Phone Field -->
+                                        <div class="row">
+                                            
+                                            <div class="col-sm-9">
+                                            <input class="form-control" type="hidden" name="price" id="price" required>
+                                            </div>
+                                        </div>
+                                        <!-- VIN Field -->
+                                        <div class="row mb-3">
+                                            
+                                            <div class="col-sm-9">
+                                            <input class="form-control" type="hidden" name="color" id="color" required>
+                                            </div>
+                                        </div>
+                                        <!-- Manufacturer ID Field -->
+                                        <div class="row">
+                                            
+                                            <div class="col-sm-9">
+                                            <input class="form-control" type="hidden" name="stock" id="stock" required>
+                                            </div>
+                                        </div>
+                                        <!-- Manufacturer ID Field -->
+                                        <div class="row">
+                                            
+                                            <div class="col-sm-9">
+                                            <input class="form-control" type="hidden" name="sales" id="sales" required>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            
+                                            <div class="col-sm-9">
+                                            <input class="form-control" type="hidden" name="dealer" id="dealer" required>
+                                            </div>
+                                        </div>
+                                    
+                                        <!-- Image Display Area -->
+                                        <div class="row mb-3">
+                                            
+                                            <div class="col-sm-9">
+                                                <input type="hidden" class="image-fluid image_display" accept="image/*">
+                                            </div>
+                                        </div>
 
-                    <!-- Image Display Area -->
-                    <div class="row mb-3">
-                      <div class="col-sm-9">
-                        <input
-                          type="hidden"
-                          class="image-fluid image_display"
-                          accept="image/*"
-                        />
-                      </div>
+                                        <!-- Inventory Container -->
+                                        <div id="inventory_container"></div>
+                                        
+                                    </div>
+                                    <!-- End of Modal Body -->
+
+                                    <!-- Modal Footer -->
+                                    <div class="modal-footer d-flex align-items-center">
+                                        <button id="modal_close" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button class="btn btn-primary w-25" type="submit">Submit</button>  
+                                    </div>
+                                    <!-- End of Modal Footer -->
+                                    <!-- Button trigger modal -->
+                                    <div class="col-sm-4 d-flex ms-4">
+                                      <button
+                                        id="modal_show"
+                                        type="button"
+                                        class="btn btn-primary mb-5"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#form_modal">Add Dealer Locator
+                                      </button>
+                                    </div>
+                                </form>
+                                <!-- End of Form Input -->
+                            </div>
+                        </div>
                     </div>
-
-                    <!-- Inventory Container -->
-                    <div id="inventory_container"></div>
-                  </div>
-                  <!-- End of Modal Body -->
-
-                  <!-- Modal Footer -->
-                  <div class="modal-footer d-flex align-items-center">
-                    <button
-                      id="modal_close"
-                      type="button"
-                      class="btn btn-secondary"
-                      data-bs-dismiss="modal"
-                    >
-                      Close
-                    </button>
-                    <button class="btn btn-primary w-25" type="submit">
-                      Submit
-                    </button>
-                  </div>
-                  <!-- End of Modal Footer -->
-                </form>
-                <!-- End of Form Input -->
-              </div>
-            </div>
-          </div>
-          <!-- End of Modal -->
+                    <!-- End of Modal -->
 
           <!-- Search Form -->
           <form id="form_search">
@@ -347,18 +290,7 @@
                   Find Dealer
                 </button>
               </div>
-              <!-- Button trigger modal -->
-              <!-- <div class="col-sm-3 d-flex justify-content-end">
-                <button
-                  id="modal_show"
-                  type="button"
-                  class="btn btn-primary"
-                  data-bs-toggle="modal"
-                  data-bs-target="#form_modal"
-                >
-                  Add Dealer Locator
-                </button>
-              </div> -->
+              
             </div>
           </form>
           <!-- End of Search Form -->

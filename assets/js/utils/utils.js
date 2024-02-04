@@ -97,6 +97,10 @@ function showNavAdminPages() {
         <div class="sb-nav-link-icon"><i class="fa-solid fa-truck-field"></i></div>
         Suppliers 
     </a>
+    <a class="nav-link" href="data-query.html">
+        <div class="sb-nav-link-icon"><i class="fa-solid fa-database"></i></div>
+        Data Query 
+    </a>
     `;
 
     // Highlight the active page

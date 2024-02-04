@@ -131,16 +131,13 @@
           <!-- End Brand Logo Section -->
 
                     
-                    <!-- Modal  -->
+                <!-- Modal -->
                     <div class="modal fade" id="form_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Vehicle Form</h1>
-                                    <button type="button" 
-                                    class="btn-close" 
-                                    data-bs-dismiss="modal" 
-                                    aria-label="Close"></button>
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Dealer Contact Information</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <!-- Input Form -->
                                 <form id="form_vehicles">
@@ -148,41 +145,32 @@
                                     <div class="modal-body">
                                         <input type="hidden" name="user_id" id="user_id"/>
                                         <!-- Dealer Field -->
-                                        <div class="row mb-3">
-                                            <div class="col-sm-3">
-                                            <label for="">Dealer:</label>
-                                            </div>
+                                        <div class="row">
+                                            
                                             <div class="col-sm-9">
-                                            <input class="form-control" type="text" name="dealer_name" id="dealer_name" required>
+                                            <input class="form-control" type="hidden" name="dealer_name" id="dealer_name" required>
                                             </div>
                                         </div>
                                         <!-- Area Field -->
-                                        <div class="row mb-3">
-                                            <div class="col-sm-3">
-                                            <label for="">Area:</label>
-                                            </div>
+                                        <div class="row">
+                                            
                                             <div class="col-sm-9">
-                                            <input class="form-control" type="text" name="area" id="area" required>
+                                            <input class="form-control" type="hidden" name="area" id="area" required>
                                             </div>
                                         </div>
                                         <!-- Address Field -->
-                                        <div class="row mb-3">
-                                            <div class="col-sm-3">
-                                            <label for="">Address:</label>
-                                            </div>
+                                        <div class="row">
+                                            
                                             <div class="col-sm-9">
-                                            <input class="form-control" type="text" name="address" id="address" required>
+                                            <input class="form-control" type="hidden" name="address" id="address" required>
                                             </div>
                                         </div>
                                         <!-- Phone Field -->
-                                        <div class="row mb-3">
-                                            <div class="col-sm-3">
-                                            <label for="">Phone:</label>
-                                            </div>
+                                        <div class="row">
+                                            
                                             <div class="col-sm-9">
-                                            <!-- <input class="form-control" type="text" name="phone" id="phone" required> -->
-                                            <a href="tel:+1234567890" name="phone" id="phone" class="form-control">+1234567890</a>
-                                            </div>
+                                                <input class="form-control" type="hidden" name="phone" id="phone" required>
+                                                </div>
                                         </div>
                                         
                                         <!-- Your HTML content -->
@@ -208,7 +196,13 @@
                                         <button id="modal_close" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                         <button class="btn btn-primary w-25" type="submit">Submit</button>  
                                     </div>
-                                    <!-- End of Modal Footer -->
+                                    <!-- End of Modal Footer -->   
+                                    <!-- Button trigger modal -->
+                                    <div class="col-sm-2 ms-auto">
+                                        <button id="modal_show" type="button" class="btn btn-white" data-bs-toggle="modal" data-bs-target="#form_modal"> 
+                                        </button>
+                                    </div>
+            
                                 </form>
                                 <!-- End of Form Input -->
                             </div>
@@ -216,6 +210,7 @@
                     </div>
                     <!-- End of Modal -->
 
+                     
                     <!-- Search Form -->
                     <form id="form_search" class="d-flex align-items-center  ms-5">
                         <div class="col-sm-4">
@@ -225,12 +220,7 @@
                         <div class="col-sm-2">
                             <button class="btn btn-primary mx-2" type="submit">Search</button>
                         </div>
-                        <!-- Button trigger modal -->
-                        <!-- <div class="col-sm-2 ms-auto ">
-                            <button id="modal_show" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#form_modal">
-                                Add Vehicles
-                            </button>
-                        </div> -->
+
                     </form>
                     
                     <!-- End of Search Form -->
@@ -244,7 +234,7 @@
                     <div class="alert alert-success d-none mb-2" role="alert"></div>
 
                     <!-- Get All Data -->
-                    <div class="row col-11 mx-5 " id="get_data">
+                    <div class="row col-11 mx-5" id="get_data">
                         <div class="col-sm-12 d-flex justify-content-center align-items-center ">
                             <div class="spinner-border" role="status">
                                 <span class="visually-hidden">Loading...</span>

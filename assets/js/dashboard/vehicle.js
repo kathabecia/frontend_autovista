@@ -73,12 +73,12 @@ async function getData(url = "", keyword = "") {
       <h6 class="card-header bg-dark text-white"> ${element.models.model_name}</h6>
       
       <div class="row">
-          <div class="col-sm-12 d-flex align-items-center">
+          <div class="col-sm-11 d-flex align-items-center">
           
               <img class="rounded" src="${backendURL}/storage/${element.image}" width="100%" height="270px">
           </div>
 
-          <div class="col-sm-12 text-start ms-3">
+          <div class="col-sm-12 text-start">
               <div class="card-body">
 
                   <div>
@@ -329,7 +329,7 @@ const deleteAction = async (e) => {
   }
 };
 
-//Update Functionality
+// Update Functionality
 const editAction = async (e) => {
   // Get Id from data Id attribute within the btn_delete anchor tag
   const id = e.target.getAttribute("data-id");
@@ -340,6 +340,8 @@ const editAction = async (e) => {
   // Show Modal Form
   document.getElementById("modal_show").click();
 };
+
+// ...
 
 // Storage of Id of chosen data to update
 let for_update_id = "";

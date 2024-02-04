@@ -1,5 +1,6 @@
 import {
   backendURL,
+  showNavDealerPages,
   showNavAdminPages,
   successNotification,
   errorNotification,
@@ -13,6 +14,8 @@ getLoggedUser();
 getData();
 
 showNavAdminPages();
+
+showNavDealerPages();
 
 async function getData(url = "", dealer_name = "") {
   // Add Loading if pagination or search is used; Remove if its not needed
@@ -64,38 +67,26 @@ async function getData(url = "", dealer_name = "") {
     json.data.forEach((element) => {
       const date = new Date(element.created_at).toLocaleString();
 
-      container += `<div class="col-sm-12 mb-3">
-                        <div class="card w-100" data-id="${element.dealer_id}">
-                        <div class="card-body">
-
-                            <div class="row">
-                            
-                                <!--<div class="col-sm-4 d-flex align-items-center"> 
-                                <div id="map"></div>
-                                </div>-->
-
-                                <div class="col-sm-7">
-                                    
-                                        <small><i class="fas fa-user-tie"></i> Dealer</small><h5 class="card-title">${element.dealer_name}</h5>
-                                        <small><i class="fas fa-chart-area"></i> Area</small><h5 class="card-title">${element.area}</h5>
-                                        <small><i class="fas fa-location-arrow"></i> Address</small><h5 class="card-title">${element.address}</h5>
-                                        <small><i class="fas fa-phone"></i> Phone</small><h5 class="card-title">
-                                        <a href="tel:${element.phone}">${element.phone}</a>
-                                        </h5>                                         
-                                        <h6 class="card-subtitle mb-2 text-body-secondary mt-4">
-                                            <small><i class="fas fa-calendar"></i> ${date}</small>
-                                        </h6>
-                                        
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-10 text-center ps-5 ms-5">
-                                  <a class="col-sm-2 btn btn-danger mb-2" href="#" id="btn_edit" data-id="${element.dealer_id}"><i class="fas fa-business-time"></i> View Inventory</a>
-                              </div>
-
-                            </div>     
-                        </div>
-                    </div>`;
+      container += `<div class="col-sm-6 mb-3">
+      <div class="card w-100" data-id="${element.dealer_id}">
+          <div class="card-body">
+              <small><i class="fas fa-user-tie"></i> Dealer</small><h5 class="card-title">${element.dealer_name}</h5>
+              <small><i class="fas fa-chart-area"></i> Area</small><h5 class="card-title">${element.area}</h5>
+              <small><i class="fas fa-location-arrow"></i> Address</small><h5 class="card-title">${element.address}</h5>
+              <small><i class="fas fa-phone"></i> Phone</small><h5 class="card-title">
+                  <a href="tel:${element.phone}">${element.phone}</a>
+              </h5>                                         
+              <h6 class="card-subtitle mb-2 text-body-secondary mt-4">
+                  <!--<small><i class="fas fa-calendar"></i> ${date}</small>-->
+              </h6>
+              <div class="text-center mt-2">
+                  <a class="btn btn-danger" href="#" id="btn_edit" data-id="${element.dealer_id}">
+                      <i class="fas fa-business-time"></i> View Inventory
+                  </a>
+              </div>
+          </div>
+      </div>
+  </div>`;
     });
 
     // Use the container to display the fetch data
